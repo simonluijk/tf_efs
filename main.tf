@@ -72,6 +72,10 @@ resource "aws_efs_file_system" "shared_ecs" {
 }
 
 resource "aws_efs_mount_target" "shared_ecs_mount" {
+    /*
+    count = "${length(var.subnets)}"
+    Currently not allowed on computed variables.
+    */
     count = "${var.subnets_count}"
     file_system_id = "${aws_efs_file_system.shared_ecs.id}"
     subnet_id = "${element(split(",", var.subnets), count.index)}"
