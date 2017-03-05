@@ -48,16 +48,12 @@ resource "aws_security_group" "efs" {
         cidr_blocks = ["${var.vpc_cidr_block}"]
     }
 
-    tags {
-        Name = "EFS ${var.filesystem_name} SG"
-    }
+    tags = "${merge(var.tags, map("Name", format("%s", var.filesystem_name)))}"
 }
 
 resource "aws_efs_file_system" "shared_ecs" {
     creation_token = "${var.filesystem_name}"
-    tags {
-        Name = "${var.filesystem_name}"
-    }
+    tags = "${merge(var.tags, map("Name", format("%s", var.filesystem_name)))}"
 }
 
 resource "aws_efs_mount_target" "shared_ecs_mount" {
