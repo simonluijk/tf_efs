@@ -9,7 +9,7 @@ resource "aws_iam_policy" "efs_policy" {
       "Sid": "Stmt1PermissionForAllEFSActions",
       "Effect": "Allow",
       "Action": "elasticfilesystem:*",
-      "Resource": "arn:aws:elasticfilesystem:${var.aws_region}:${var.account_id}:file-system/${var.filesystem_name}"
+      "Resource": "arn:aws:elasticfilesystem:*:${var.account_id}:file-system/${var.filesystem_name}"
     },
     {
       "Sid": "Stmt2RequiredEC2PermissionsForAllEFSActions",
